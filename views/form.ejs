@@ -1,0 +1,18 @@
+<%- include("partials/header.ejs") %>
+
+
+
+    <body>
+        <h1>Message Form</h1>
+
+        <form action="/submit" method="Post">
+            <!-- Subject Input -->
+            <textarea id="message" name="message" rows="4" cols="50" placeholder="Enter your topic here..."
+                required></textarea><br><br>
+            <!-- Message Input -->
+            <textarea id="message" name="message" rows="20" cols="50" placeholder="Enter your message here..."
+                required></textarea><br><br> <!-- Submit Button -->
+            <input type="submit" value="Submit">
+        </form>
+    </body>
+    <%- include("partials/footer.ejs") %>

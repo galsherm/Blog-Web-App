@@ -13,6 +13,7 @@ app.get("/", (req, res) => {
 });
 
 app.post("/submit", (req, res) => {
+  res.render("form.ejs");
 
 });
 
