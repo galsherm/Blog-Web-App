@@ -19,43 +19,26 @@ app.post("/blog", (req, res) => {
   // Extract message and subject from the request body
   const message = req.body.message;
   const subject = req.body.subject;
-  
+
   // Create a new blog post object
   const newPost = {
     message: message,
     subject: subject
   };
-  
+
   // Push the new post object into the array
   blogPosts.push(newPost);
-  console.log(`-----------------------\n`);
 
-  blogPosts.forEach((post, index) => {
-    console.log(`Blog Post ${index + 1}:`);
-    console.log(`Subject: ${post.subject}`);
-    console.log(`Message: ${post.message}`);
-  });
-  
-  // Log the new post
-  console.log("New blog post added:", newPost);
-  
-  // Send response (to the client)
-  res.sendStatus(200);
+
+  res.render("index.ejs", { blogPosts: blogPosts });
+
 });
 
-// Endpoint to get all blog posts
-app.get("/blog", (req, res) => { //client make a GET request
-  
 
-  // Server sends a JSON (blogPosts) back to the client
-  res.json(blogPosts);
-});
 app.post("/submit", (req, res) => {
-  //msgBlog = req.body.message;
-  //subjectBlog = req.body.subject;
-  //console.log(req.body.subject);
   res.render("form.ejs");
 });
+
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
