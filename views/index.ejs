@@ -1,22 +1,24 @@
 <%- include("partials/header.ejs") %>
 
-  <h1>Welcome to the Blog website</h1>
-  <form action="/submit" method="POST">
-    <input type="submit" value="Post">
-  </form>
+<h1>Welcome to the Blog website</h1>
+<form action="/submit" method="POST">
+  <input type="submit" value="Post">
+</form>
 
-  <% if (locals.blogPosts && locals.blogPosts.length> 0) { %>
-    <% blogPosts.forEach((post, index)=> { %>
-      <div>
-        <h3>Blog Post <%= index + 1 %>:</h3>
-        <p>Subject: <%= post.subject %>
-        </p>
-        <p>Message: <%= post.message %>
-        </p>
-      </div>
-      <% }); %>
-        <% } else { %>
-          <p>No blog posts available.</p>
-          <% } %>
+<% if (locals.blogPosts && locals.blogPosts.length > 0) { %>
+  <% blogPosts.forEach((post, index) => { %>
+    <div>
+      <h3>Blog Post <%= index + 1 %>:</h3>
+      <p>Subject: <%= post.subject %></p>
+      <p>Message: <%= post.message %></p>
+      <!-- Modify the form action to include the index of the post being edited -->
+      <form action="/editPost/<%= index %>" method="POST">
+        <input type="submit" value="Edit Post">
+      </form>
+    </div>
+  <% }); %>
+<% } else { %>
+  <p>No blog posts available.</p>
+<% } %>
 
-            <%- include("partials/footer.ejs") %>
+<%- include("partials/footer.ejs") %>
