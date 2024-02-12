@@ -1,24 +1,33 @@
 <%- include("partials/header.ejs") %>
 
-<h1>Welcome to the Blog website</h1>
-<form action="/submit" method="POST">
-  <input type="submit" value="Post">
-</form>
+  <div class="container">
+    <% if (locals.blogPosts && locals.blogPosts.length> 0) { %>
 
-<% if (locals.blogPosts && locals.blogPosts.length > 0) { %>
-  <% blogPosts.forEach((post, index) => { %>
-    <div>
-      <h3>Blog Post <%= index + 1 %>:</h3>
-      <p>Subject: <%= post.subject %></p>
-      <p>Message: <%= post.message %></p>
-      <!-- Modify the form action to include the index of the post being edited -->
-      <form action="/editPost/<%= index %>" method="POST">
-        <input type="submit" value="Edit Post">
-      </form>
-    </div>
-  <% }); %>
-<% } else { %>
-  <p>No blog posts available.</p>
-<% } %>
+      <ul id="postsList">
+        <a id="newPostBtn" href="/newPost">New Post</a>
+        <% blogPosts.forEach((post, index)=>{ %>
+          <li>
 
-<%- include("partials/footer.ejs") %>
+            <h2>
+              <%=post.title%>
+            </h2>
+            <small>
+              <%=post.date %>
+            </small>
+            <p>
+              <%=post.content%>
+            </p>
+            <small>By: <%=post.author%> </small>
+            <a class="edit" href="/editPost/<%=index %>">Edit Post</a>
+            <a class="delete" href="/api/posts/delete/<%=index %>">Delete</a>
+          </li>
+          <% }); %>
+      </ul>
+      <% } else { %>
+        <p>No blog posts available.</p>
+        <a id="newPostBtn" href="/newPost">Create New Post</a>
+
+        <% } %>
+  </div>
+
+  <%- include("partials/footer.ejs") %>
