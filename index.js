@@ -76,6 +76,18 @@ app.post("/editPost/:id", (req, res) => {
   res.render("index.ejs", { blogPosts: blogPosts });
 });
 
+app.get("/deletePost/:id", (req, res) => {
+  const postId = req.params.id;
+
+  // Remove the post from the array
+  blogPosts.splice(postId, 1);
+
+  // Redirect the user to the updated post or any other relevant page
+  if (blogPosts.length > 0)
+    res.render("index.ejs", { blogPosts: blogPosts });
+  else res.redirect("/");
+
+});
 
 
 app.listen(port, () => {
